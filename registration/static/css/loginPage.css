@@ -4,6 +4,12 @@ body {
 }
 
 .logo {
+   width:100px;
+   height:100px;
+   padding:50px;
+}
+
+.logo {
   text-align: center;
 }
 
@@ -47,7 +53,6 @@ body {
   text-align: center;
   font-family: "Sansita", sans-serif;
   font-size: 2em;
-  padding-top: 5em;
 }
 
 input[type="email"],
@@ -140,3 +145,5 @@ a{
     width: 100vw;
   }
 }
+
+

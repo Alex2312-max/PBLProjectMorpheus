@@ -24,7 +24,7 @@ from registration.views import (
 )
 from userPage.views import userPage_view
 from updatePage.views import updatePage_view
-
+from processing.views import processing_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +34,6 @@ urlpatterns = [
     path('adminPage/', include('adminPage.urls')),
     path('login/', login_view, name="login"),
     path('logout/', logout_view, name="logout"),
-    path('userPage/', userPage_view, name="userPage")
+    path('userPage/<int:id>', userPage_view, name="userPage"),
+    path('processing/<int:id>', processing_view, name="processing")
 ]

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import UpdateInfoForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from updatePage.models import UpdatePage
 
 
 def updatePage_view(request):
@@ -10,9 +11,8 @@ def updatePage_view(request):
         print(form.errors)
         if form.is_valid():
             form.save()
-            # weight = form.cleaned_data('weight')
-            # id = form.cleaned_data('id')
-            return HttpResponseRedirect('/userPage')
+            user_id = len(UpdatePage.objects.all())
+            return HttpResponseRedirect(f'/userPage/{user_id}')
     else:
         form = UpdateInfoForm()
     return render(request, 'updatePage/updatePage.html', {'form': form})

@@ -41,7 +41,7 @@ def login_view(request):
 
     user = request.user
     if user.is_authenticated:
-        return redirect('/userPage')
+        return redirect(f'/userPage/{user.id - 1}')
 
     if request.method == "POST":
         form = AccountAuthenticationForm(request.POST)
@@ -55,7 +55,7 @@ def login_view(request):
                 return redirect('/adminPage')
             elif user:
                 login(request, user)
-                return redirect('/userPage')
+                return redirect(f'/userPage/{user.id - 1}')
 
     else:
         form = AccountAuthenticationForm()

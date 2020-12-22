@@ -38,13 +38,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'registration.apps.RegisterConfig',
-    'registration.templates',
+    # 'registration.apps.RegisterConfig',
+    'registration',
     'homePage',
-    'updatePage.apps.UpdatepageConfig',
+    'updatePage',
     'adminPage',
     'userPage',
+    'processing',
+    'django_q'
 ]
+
+Q_CLUSTER = {
+    "name": "shop",
+    "orm": "default",  # Use Django's ORM + database for broker
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

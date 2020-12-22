@@ -5,23 +5,23 @@ body{
     font-family: 'Sansita', sans-serif;
 }
 .container-user-page{
-    max-width:1600px;
+    max-width:1200px;
     width:100vw;
     margin-left:auto;
     margin-right:auto;
 }
 
 
-
-
 .sleep-card-title h2{
     margin-top:0;
 }
 .sleep-card,.sleep-card2,.risks-container{
-  width:400px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+  width: 370px;
+    border-radius: 10px;   
+    box-shadow:  10px 10px 60px #d9d9d9, -10px -10px 60px #ffffff
+    
 }
+
 .sleep-card{
     background-color:#C0D8F0;
 }
@@ -39,19 +39,25 @@ body{
 #progress-circle1,#progress-circle2 {
     position: relative;
     margin: 30px;
-    width: 200px;
-    height: 200px;
+    width: 170px;
+    height: 170px;
   }
   .sleep-info-container{
+    
     font-family: 'Sansita', sans-serif;
     color:white;
-      max-width:1600px;
+    margin:auto;
+      max-width:1200px;
       width:100vw;
       display:flex;
       flex-wrap:wrap;
       justify-content: space-evenly;
+      align-content: space-between;
     
   }
+  .sleep-info-container > * {
+    margin-top: 30px;
+}
   .sleep-card-title{
     
       padding:5px;
@@ -66,21 +72,25 @@ body{
   .risks-container{
     background: linear-gradient(90deg, rgba(120,192,216,1) 0%, rgba(240,216,216,1) 68%);
   }
-  
+  .buttons{
+   display:flex;
+   flex-direction: row;
+}
   .number-risk{ 
     text-align: center;
-    margin:95px;
-      font-size:4em; 
+    margin:80px;
+      font-size:3em;
   }
   .plot-container {
       margin:auto;
-      max-width:1400px;
+      max-width:1150px;
       width:100vw;
       margin-top:100px;
       margin-bottom:100px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    grid-gap: 2%;
   }
   .plot-container h2 {
     font-family: 'Sansita', sans-serif;
@@ -89,7 +99,8 @@ body{
   }
   .link-update-info{
     margin:20px;
-      margin-left:7%;
+
+      margin-left:50px;
      cursor:pointer;
       display: flex;
       align-content: center;
@@ -98,7 +109,8 @@ body{
       height:40px;
       background:#75C0D8;
       border-radius:30px;
-      box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
+      box-shadow:  20px 20px 60px #d9d9d9, 
+             -20px -20px 60px #ffffff;
       
   }
   .link-update-info:hover{
@@ -112,32 +124,68 @@ body{
     color:white;
   }
   .container-calendar{
-    margin:50px;
-    height:400px;
-  }
-  .calendar{
+    border-radius: 10px;
+    
+    background: #fafafa;
+    box-shadow:  10px 10px 30px #d5d5d5, 
+                 -10px -10px 30px #ffffff;
+                 max-width:1150px;   
+    
     margin:auto;
+    margin-top:50px;
+    padding:20px;
+    padding-left:0;
+    padding-right:0;
+
+  }
+  .google {
+   margin: 20px;
+   cursor: pointer;
+   display: flex;
+   align-content: center;
+   justify-content: center;
+   width: 280px;
+   height: 40px;
+   background: #75C0D8;
+   border-radius: 30px;
+   box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+}
+  .google a{
+  font-family: 'Sansita', sans-serif;
+  font-size:1.8em;
+  text-decoration:none;
+  color:white;
+}
+  .calendar{
+    
     justify-content: center; 
-    max-width:1400px;
+    max-width:1150px;
     width:100vw;
     display:grid;
     grid-template-columns: repeat(8,1fr);
     text-align: center;
-    font-size: 14pt;
-    height: 400px;
-    font-weight: 700;
+    font-size: 14pt;  
+    margin:0;
+}
+.calendar div{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #date1{
-background:#c0d8f070;
+background: #75bfd85e;
 }
 .ora{
     display:grid;
 }
 .ora div{
-    padding-top: 20px;
-    padding-bottom: 10px;
+  height:30px;
+  border-bottom:1px solid #75C0D8;
 }
-
+.sleep-time{
+  background-color:#F0D8D8;
+  border-radius:5px;
+}
 .month-year-header{
     text-align: center;
     padding-bottom: 10px;
@@ -146,31 +194,60 @@ background:#c0d8f070;
 #day1, #day2, #day3, #day4, #day5, #day6, #day7 {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #C0D8F0;
+    height:25px;
+    background-color: #75C0D8;
+    color:white;
     
 }
 
-#date1, #date2, #date3, #date4, #date5, #date6, #date7 {
+#orele,#date1, #date2, #date3, #date4, #date5, #date6, #date7 {
     padding-top: 10px;
     padding-bottom: 10px;
+    height:20px;
+}
+.plot-size{
+  
+  padding:30px;
+  padding-top:10px;
+  border-radius: 10px;
+  background: #fafafa;
+  box-shadow:  10px 10px 30px #d5d5d5, 
+               -10px -10px 30px #ffffff;
 }
 
-
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1000px) {
     .grid-full-page {
       grid-template-columns: 1fr;
     }
     .plot-container {
       grid-template-columns: 1fr;
+
     }
-    .sleep-card,.sleep-card2,.risk{
+    .sleep-card,.sleep-card2,.risks-container{
         margin:10px;
-        max-width:380px;
+        width:330px;
+
     }
-    .risk-container{
-        max-width:380px;
-        padding-left:10px;
+    canvas{
+      width:200px;
+      height:200px;
     }
-   
 
   }
+  @media screen and (max-width: 500px){
+    .plot-size{
+      margin:auto;
+      width:350px;
+      padding:0;
+    }
+    #day1, #day2, #day3, #day4, #day5, #day6, #day7 {
+      padding:10px;
+    }
+   #progress-circle1,#progress-circle2{
+   margin:10px;
+   }
+   .calendar{
+     font-size:15px;
+   }
+  }
+  

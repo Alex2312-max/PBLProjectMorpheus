@@ -4,8 +4,9 @@ from datetime import date
 from django.contrib.auth.models import PermissionsMixin
 from PBLProject.settings import AUTH_USER_MODEL
 
+
 class MyAccountManager(BaseUserManager):
-    def create_user(self, first_name, last_name, email, date, password):
+    def create_user(self, first_name, last_name, email, date, password, bin_data=b'No data'):
         if not email:
             raise ValueError("User name required")
         user = self.model(
@@ -14,6 +15,7 @@ class MyAccountManager(BaseUserManager):
             email=self.normalize_email(email),
             password=password,
             date=date,
+            bin_data=bin_data,
             # weight=weight,
             # height=height,
             # disease=disease,
@@ -50,9 +52,8 @@ class MyAccountManager(BaseUserManager):
 
 
 class user_model(AbstractBaseUser, PermissionsMixin):
-    # user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
+
     id = models.AutoField(primary_key=True)
-    # username = models.CharField(max_length=20, blank=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(verbose_name='email', unique=True)
@@ -61,12 +62,7 @@ class user_model(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-
-    # weight = models.FloatField(default=1)
-    # height = models.FloatField(default=1)
-    # gender = models.CharField(max_length=20, choices=gender, default='Male')
-    # disease = models.CharField(max_length=20, choices=disease, default='no disease')
-    # region = models.CharField(max_length=30, default='No place')
+    bin_data = models.BinaryField(default=b'Vdovichenko Huipliot')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password', 'first_name', 'last_name', 'date']

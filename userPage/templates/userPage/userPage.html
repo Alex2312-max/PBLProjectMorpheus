@@ -3,28 +3,48 @@
 {% load static %}
 <head>
     <title>Morpheus</title>
-    {% if request.user.is_authenticated %}
+    <!--{% if request.user.is_authenticated %}
         <p><a href="{% url 'logout' %}">Logout</a></p>
     {% else %}
-    {% endif %}
+    {% endif %}-->
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" href="{% static 'css/user-page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/userpage-header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user-Page.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Sansita&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200&display=swap" rel="stylesheet">
 </head>
 <script src="{% static 'JS/progressbar.js' %}"></script>
     <script src="{% static 'JS/Chart.js' %}"></script>
-    
+<script>
+    var link = document.getElementById("updatePage");
+    console.log(link);
+    var id = '{{user.id}}';
+    id = id - 1;
+    var str = 'http://127.0.0.1:8000/updatePage/';
+    link.setAttribute('href', str.concat(id.toString()));
+</script>
 <body>
+    <header class="site-header">
+        <!--{% static 'images/logo.svg' %}-->
+        <img class="logo" height="30px" src="{% static 'images/logo.svg' %}" href="http://127.0.0.1:8000"/>
+        <nav class="navigation" height="30px">
+            <a href="#" class="user-name">{{ data.first_name }} {{data.last_name}}</a>
+            {% if request.user.is_authenticated %}
+            <a class="signout" height="30px" href="{% url  'logout' %}">Sign out</a>
+            {% else %}
+            {% endif %}
+        </nav>
+    </header>
     <div class="container-user-page">
-        <div class="link-update-info"><a href="#">View my info</a></div>
+        <div class="link-update-info"><a id="updatePage" href="http://127.0.0.1:8000/updatePage/{{ user.id }}">View my info</a></div>
+    <div class="google"><a href="http://127.0.0.1:8000/processing/{{ user.id }}" target="_blank">Google syncronization</a></div>
     <div class="sleep-info-container">
         <div class="sleep-card">
             <div class="sleep-info-flex">
                 <div class="sleep-icon">
-                    <img src="{% static 'cloudy-night.svg' %}" />
+                    <img src="{% static 'images/cloudy-night.svg' %}" />
                 </div>
                 <div id="progress-circle1">
                 </div>
@@ -39,7 +59,7 @@
         <div class="sleep-card2">
             <div class="sleep-info-flex">
                 <div class="sleep-icon">
-                    <img src="{% static 'pillow.svg' %}" />
+                    <img src="{% static 'images/pillow.svg' %}" />
                 </div>
                 <div id="progress-circle2">
                 </div>
@@ -65,49 +85,131 @@
 <div class="container-calendar">
     <div class="month-year-header">
         <h2 id="month-year">
-            <h2>
+            </h2>
     </div>
-    <div class="calendar">
-        <div class="empty">
-        </div>
-        <div id="day1">
-        </div>
-        <div id="day2">
-        </div>
-        <div id="day3">
-        </div>
-        <div id="day4">
-        </div>
-        <div id="day5">
-        </div>
-        <div id="day6">
-        </div>
-        <div id="day7">
-        </div>
-        <div class="ora">
-            <br>
-            <div>07:00</div>
-            <div>10:00</div>
-            <div>13:00</div>
-            <div>16:00</div>
-            <div>19:00</div>
-            <div>21:00</div>
-        </div>
-        <div id="date1">
-        </div>
-        <div id="date2">
-        </div>
-        <div id="date3">
-        </div>
-        <div id="date4">
-        </div>
-        <div id="date5">
-        </div>
-        <div id="date6">
-        </div>
-        <div id="date7">
-        </div>
-    </div>
+     <div class="calendar">
+                <!--Acest div "empyu" e folosit pentru layout-->
+                <div class="empty">
+                </div>
+                <!--Merge un rand cu zilele saptamanii-->
+                <div id="day1">
+                </div>
+                <div id="day2">
+                </div>
+                <div id="day3">
+                </div>
+                <div id="day4">
+                </div>
+                <div id="day5">
+                </div>
+                <div id="day6">
+                </div>
+                <div id="day7">
+                </div>
+                <!--Mai departe merge un rand cu coloane ,prima coloana e mai diferita,ea contine doar orele -->
+                <div class="ora">
+                    <div id="orele"></div>
+                    <div>01:00</div>
+                    <div>02:00</div>
+                    <div>03:00</div>
+                    <div>04:00</div>
+                    <div>05:00</div>
+                    <div>06:00</div>
+                    <div>07:00</div>
+                    <div>08:00</div>
+                    <div>09:00</div>
+                    <div>10:00</div>
+                    <div>11:00</div>
+                    <div>12:00</div>
+                    <div>13:00</div>
+                    <div>14:00</div>
+                    <div>15:00</div>
+                    <div>16:00</div>
+                    <div>17:00</div>
+                    <div>18:00</div>
+                    <div>19:00</div>
+                    <div>20:00</div>
+                    <div>21:00</div>
+                    <div>22:00</div>
+                    <div>23:00</div>
+                    <div>00:00</div>
+
+                </div>
+                <!--Fiecare div cu clasa "ora" reprezinta o coloana in care se contine un div cu data si toate restul trebuie sa contina
+                evenimente din google api si regimul de somn-->
+                <div class="ora" id="1day">
+                    <div id="date1">
+                    </div>
+                    {% for hour_generated in hours_generated %}
+                    <div>
+                    {%if hour_generated == 1 %}
+                    <div class="sleep-time"></div>
+                    {%endif%}
+                    </div>
+                    {%endfor%}
+                </div>
+                <div class="ora" >
+                    <div id="date2"></div>
+                    {% for hour_generated in hours_generated %}
+                    <div>
+                    {%if hour_generated == 1 %}
+                    <div class="sleep-time"></div>
+                    {%endif%}
+                    </div>
+                    {%endfor%}
+                </div>
+                <div class="ora" >
+                    <div id="date3"></div>
+                    {% for hour_generated in hours_generated %}
+                    <div>
+                    {%if hour_generated == 1 %}
+                    <div class="sleep-time"></div>
+                    {%endif%}
+                    </div>
+                    {%endfor%}
+                </div>
+                <div class="ora" >
+                    <div id="date4"></div>
+                    {% for hour_generated in hours_generated %}
+                    <div>
+                    {%if hour_generated == 1 %}
+                    <div class="sleep-time"></div>
+                    {%endif%}
+                    </div>
+                    {%endfor%}
+                </div>
+                <div class="ora" >
+                    <div id="date5"></div>
+                    {% for hour_generated in hours_generated %}
+                    <div>
+                    {%if hour_generated == 1 %}
+                    <div class="sleep-time"></div>
+                    {%endif%}
+                    </div>
+                    {%endfor%}
+                </div>
+                <div class="ora" >
+                    <div id="date6"></div>
+                    {% for hour_generated in hours_generated %}
+                    <div>
+                    {%if hour_generated == 1 %}
+                    <div class="sleep-time"></div>
+                    {%endif%}
+                    </div>
+                    {%endfor%}
+                </div>
+                <div class="ora" >
+                    <div id="date7"></div>
+                    {% for hour_generated in hours_generated %}
+                    <div>
+                    {%if hour_generated == 1 %}
+                    <div class="sleep-time"></div>
+                    {%endif%}
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+            <!--Aici se termina calendarul-->
 </div>
         <div class="plot-container">
             <div class="plot-size">
@@ -139,6 +241,285 @@
     
     
 </body>
-<script src="{% static 'JS/user-page.js' %}"></script>
 
+<!--<script src="{% static 'JS/user-page.js' %}"></script>-->
+<script>
+//Toate variabilele utilizate cu date ale utilizatorului
+
+var recomended_sleep_hours = 60; //orele de dormit recomandate pe o saptamana
+var recomended_quality = 100;
+var value_hours = "{{schedule.Slept_hours}}"; //orele dormite de utilizator intr-o saptamana
+var value_quality = "{{schedule.Sleep_Quality|floatformat}}"; //calitatea somnului de la 0 la 100
+
+
+
+//Cat e de mare riscul in cifre
+var risk_number_1= "{{schedule.IDS|floatformat}}";
+document.getElementById("risk-number-1").innerHTML = risk_number_1 +"/100";
+
+//plot data
+let data1 = [1, 2, 10, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+let data2 = [1, 2, 10, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+let data3 = [1, 2, 10, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+let data4 = [1, 2, 10, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+//mai departe nimic nu trebuie de schimbat in cod
+value_hours = value_hours / 100;
+var bar = new ProgressBar.Circle('#progress-circle1', {
+    color: ' #fff',
+    strokeWidth: 5,
+    trailWidth: 1,
+    easing: 'easeInOut',
+    duration: 1400,
+    text: {
+        autoStyleContainer: false
+    },
+    from: { color: ' #fff', width: 5 },
+    to: { color: ' #fff', width: 5 },
+    step: function (state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+        circle.path.setAttribute('stroke-width', state.width);
+
+
+        var value = Math.round(circle.value() * (value_hours * 100));
+        if (value === 0) {
+            circle.setText('');
+        } else {
+            circle.setText(value_hours * 100 + "/" + recomended_sleep_hours);
+        }
+
+    }
+});
+bar.text.style.fontFamily = "'Sansita', sans-serif";
+bar.text.style.fontSize = '2.5em';
+
+bar.animate(value_hours * 100 / recomended_sleep_hours);  // How much the circle is filled
+
+value_quality = value_quality / 100;
+var bar2 = new ProgressBar.Circle('#progress-circle2', {
+    color: ' #fff',
+    strokeWidth: 5,
+    trailWidth: 1,
+    easing: 'easeInOut',
+    duration: 1400,
+    text: {
+        autoStyleContainer: false
+    },
+    from: { color: ' #fff', width: 5 },
+    to: { color: ' #fff', width: 5 },
+    step: function (state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+        circle.path.setAttribute('stroke-width', state.width);
+
+
+        var value = Math.round(circle.value() * (value_quality * 100));
+        if (value === 0) {
+            circle.setText('');
+        } else {
+            circle.setText(value_quality * 100 + "/" + recomended_quality);
+        }
+
+    }
+});
+bar2.text.style.fontFamily = "'Sansita', sans-serif";
+bar2.text.style.fontSize = '2.2em';
+
+bar2.animate(value_quality);
+
+
+
+//plot manipulation
+
+
+
+new Chart(document.getElementById("line-chart1"), {
+  type: "line",
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    datasets: [
+      {
+        data: [
+          data1[0],
+          data1[1],
+          data1[2],
+          data1[3],
+          data1[4],
+          data1[5],
+          data1[6],
+          data1[7],
+          data1[8],
+          data1[9],
+          data1[10],
+          data1[11],
+        ],
+        label: "Hours slept",
+        borderColor: "#3e95cd",
+        fill: false,
+      },
+    ],
+  },
+  options: {},
+});
+new Chart(document.getElementById("line-chart2"), {
+  type: "line",
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    datasets: [
+      {
+        data: [
+          data2[0],
+          data2[1],
+          data2[2],
+          data2[3],
+          data2[4],
+          data2[5],
+          data2[6],
+          data2[7],
+          data2[8],
+          data2[9],
+          data2[10],
+          data2[11],
+        ],
+        label: "Hours slept",
+        borderColor: "#3e95cd",
+        fill: false,
+      },
+    ],
+  },
+  options: {},
+});
+new Chart(document.getElementById("line-chart3"), {
+  type: "line",
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    datasets: [
+      {
+        data: [
+          data3[0],
+          data3[1],
+          data3[2],
+          data3[3],
+          data3[4],
+          data3[5],
+          data3[6],
+          data3[7],
+          data3[8],
+          data3[9],
+          data3[10],
+          data3[11],
+        ],
+        label: "Hours slept",
+        borderColor: "#3e95cd",
+        fill: false,
+      },
+    ],
+  },
+  options: {},
+});
+new Chart(document.getElementById("line-chart4"), {
+  type: "line",
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    datasets: [
+      {
+        data: [
+          data4[0],
+          data4[1],
+          data4[2],
+          data4[3],
+          data4[4],
+          data4[5],
+          data4[6],
+          data4[7],
+          data4[8],
+          data4[9],
+          data4[10],
+          data4[11],
+        ],
+        label: "Hours slept",
+        borderColor: "#3e95cd",
+        fill: false,
+      },
+    ],
+  },
+  options: {},
+});
+
+
+var d = new Date();
+var n = d.getDay();
+var m = d.getMonth();
+var y = d.getFullYear();
+var date = d.getDate();
+var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var dates = ["0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"];
+document.getElementById("month-year").innerHTML = months[m] + " " + y;
+document.getElementById("day1").innerHTML = weekdays[n];
+document.getElementById("day2").innerHTML = weekdays[n + 1];
+document.getElementById("day3").innerHTML = weekdays[n + 2];
+document.getElementById("day4").innerHTML = weekdays[n + 3];
+document.getElementById("day5").innerHTML = weekdays[n + 4];
+document.getElementById("day6").innerHTML = weekdays[n + 5];
+document.getElementById("day7").innerHTML = weekdays[n + 6];
+
+
+document.getElementById("date1").innerHTML = dates[date];
+document.getElementById("date2").innerHTML = dates[date + 1];
+document.getElementById("date3").innerHTML = dates[date + 2];
+document.getElementById("date4").innerHTML = dates[date + 3];
+document.getElementById("date5").innerHTML = dates[date + 4];
+document.getElementById("date6").innerHTML = dates[date + 5];
+document.getElementById("date7").innerHTML = dates[date + 6];</script>
 </html>
