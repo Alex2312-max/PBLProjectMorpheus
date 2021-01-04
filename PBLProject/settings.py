@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'adminPage',
     'userPage',
     'processing',
-    'django_q'
+    # 'django_q'
 ]
 
 Q_CLUSTER = {
