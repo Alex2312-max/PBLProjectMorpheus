@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
-
+# my name is jora
 def filter_date(list_of_events):
     schedule = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     for event in list_of_events:
