@@ -62,7 +62,7 @@ class user_model(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    bin_data = models.BinaryField(default=b'Vdovichenko Huipliot')
+    bin_data = models.BinaryField(default=b'')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password', 'first_name', 'last_name', 'date']

@@ -17,7 +17,7 @@
   height: 100vh;
   max-height: 1200px;
   background: #f0d8d8;
-  background-image: url("sleep2_1.png");
+  background-image: url("{% static 'images/sleep2_1.png' %}");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -68,9 +68,11 @@
 }
 
 .solution-section {
+  {% load static %}
   height: 500px;
   background: #c0d8f0;
-  background-image: url("clock 1.png");
+
+  background-image: url("{% static 'images/clock 1.png' %}");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
